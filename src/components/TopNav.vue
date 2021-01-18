@@ -17,7 +17,7 @@
           <li class="nav-item top-nav-links">
             <router-link to="/dashboard" class="text-danger" :active-class="location === 'dashboard' ? 'current' : null">Profile</router-link>
           </li>
-          <li v-if="getUserDetail['status'] === 'admin'" class="nav-item top-nav-links">
+          <li v-if="getUserDetail['status'] === 'admin' && getAuthState" class="nav-item top-nav-links">
             <router-link to="/add-video" class="text-danger" :active-class="location === 'add-video' ? 'current' : null">Add a Video</router-link>
           </li>
           <li class="nav-item top-nav-links">

@@ -5,7 +5,7 @@
         <app-side-nav location="summary"></app-side-nav>
       </div>
       <div class="col-12 col-md-12 col-lg-10">
-        <app-top-nav location="dashboard" ></app-top-nav>
+        <app-top-nav location="dashboard"></app-top-nav>
         <app-summary></app-summary>
         <app-movies></app-movies>
       </div>
@@ -18,7 +18,7 @@ import topNav from "../TopNav";
 import Summary from "./Summary";
 import movie from "./MovieSumm";
 import axios from "axios";
-import { mapActions, mapGetters } from 'vuex'
+import { mapActions, mapGetters } from "vuex";
 export default {
   components: {
     appSideNav: sideNav,
@@ -40,21 +40,28 @@ export default {
         this.userIsAuth(true);
       })
       .catch((error) => {
-        localStorage.clear()
-        // this.userIsAuth(false);
+        //  if(error.statusCode === )
         throw error;
       });
   },
-  methods:{
-    ...mapActions(['userIsAuth','updateUserDetail'])
+  methods: {
+    ...mapActions(["userIsAuth", "updateUserDetail"]),
+  },
+  computed: {
+    ...mapGetters(["getUserDetails"]),
   },
   beforeRouteEnter(to, from, next) {
-    const token = localStorage.getItem('token');   
-    if(token){
-      next();
-    }else{
-      
-      next('/login')
+    const expiresIn = localStorage.getItem("expiresIn");
+    let expDate = Date.parse(expiresIn);
+    if (expDate) {
+      if (expDate > Date.now()) {
+        next();
+      }else{
+  next("/login");
+      }
+    
+    } else {
+      next("/login");
     }
   },
 };

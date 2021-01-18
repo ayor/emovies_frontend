@@ -1,7 +1,10 @@
 export const UPDATE_LOADER = (state, payload) => state.LoaderState = payload;
 export const USER_IS_AUTHORIZED = (state, payload) => state.isAuthorized = payload;
 export const USER_IS_ADMIN = (state, payload) => state.isAdmin = payload;
+export const UPDATE_TOTAL = (state, payload) => state.total = payload;
+export const UPDATE_SHIPPING_FEE = (state, payload) => state.shippingFee = payload;
 export const UPDATE_USER_EMAIL = (state, payload) => state.email = payload;
+export const SHOW_ERROR_SIGNIN_MESSAGE = (state, payload) => state.errorMessage = payload;
 export const USER_IS_SIGNED_UP = (state, payload) => state.isSignedUp = payload;
 export const UPDATE_USER_PASSWORD = (state, payload) => state.password = payload;
 export const UPDATE_USER_DETAIL = (state, payload) => state.UserDetail = { ...state.UserDetail, ...payload }; 

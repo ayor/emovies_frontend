@@ -111,49 +111,21 @@ export default {
     back() {
       this.isPreviewed = !this.isPreviewed;
       this.isDisabled = !this.isDisabled;
-    },
-    // submit() {
-    //   /*
-    //     on submit, 
-    //     1- increment the video ID
-    //       **get the number of videos available in the repo and store in an array, and increment the array length by 1
-
-    //     2- post the videoData to firebase. 
-
-    //   */
-    //   let videoList = [];
-    //   var me =this
-    //   Axios.get("https://localhost:44351/api/video").then(
-    //     ({ data }) => {
-    //       for (let key in data) {
-            
-    //         videoList.push(data[key]);
-    //       }
-    //       //increment id
-
-        
-    //       //post videoData
-    //       Axios.post(
-    //         "https://localhost:44351/api/video",
-    //         this.videoData
-    //       ).then(
-    //         response => {
-    //           this.postStatus = response.status;
-    //           // console.log(this.postStatus);
-    //         });
-    //     }
-    //   ),
-    //     setTimeout(function displaySuccessMessage() {
-    //       me.isSubmitted = true;
-    //       setTimeout(function reloadPage() {
-    //         //reset page
-    //         me.videoData.Title = "";
-    //         me.videoData.Format = "";
-    //         me.videoData.Stock = 10;
-    //         (me.isSubmitted = false), (me.isPreviewed = false),(me.isDisabled = !me.isDisabled);
-    //       }, 3000);
-    //     }, 1000);
-    // }
+    }
+  },
+   beforeRouteEnter(to, from, next) {
+    const expiresIn = localStorage.getItem("expiresIn");
+    let expDate = Date.parse(expiresIn);
+    if (expDate) {
+      if (expDate > Date.now()) {
+        next();
+      }else{
+  next("/login");
+      }
+    
+    } else {
+      next("/login");
+    }
   }
 };
 // );

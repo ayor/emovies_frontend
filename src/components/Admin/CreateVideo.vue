@@ -1,87 +1,98 @@
 <template>
-  <div class="row mt-5 pt-5" >
+  <div class="row mt-5 pt-5">
     <app-top-nav location="add-video"></app-top-nav>
-    <div class="col ">
-    <div class="m-auto text-center sign-in-form">
-      <form @submit="(event) => createVideo({ event, getVideoDetails })">
-        <!--UserDetail:{Firstname, Lastname, Email, Password, ConfirmPassword}} -->
-        <div class="form-header">
-          <h1 class="display-4 text-muted text-center font-weight-bold text-left mb-3">
-            Add Video
-          </h1>
-        </div>
+    <div class="col">
+      <div class="m-auto text-center sign-in-form">
+        <form @submit="(event) => createVideo({ event, getVideoDetails })">
+          <!--UserDetail:{Firstname, Lastname, Email, Password, ConfirmPassword}} -->
+          <div class="form-header">
+            <h1
+              class="display-4 text-muted text-center font-weight-bold text-left mb-3"
+            >
+              Add Video
+            </h1>
+          </div>
 
-        <div class="input-group my-2">
-          <input
-            type="text"
-            placeholder="Video Title"
-            class="form-control form-input"
-            id="input-1"
-            v-model="title"
+          <div class="input-group my-2">
+            <input
+              type="text"
+              placeholder="Video Title"
+              class="form-control form-input"
+              id="input-1"
+              v-model="title"
+            />
+          </div>
+          <div class="input-group my-2">
+            <textarea
+              rows="5"
+              col="10"
+              placeholder="Description"
+              class="form-control form-input"
+              id="input-2"
+              v-model="description"
+            />
+          </div>
+          <div class="input-group my-2">
+            <input
+              type="Number"
+              placeholder="Price"
+              class="form-control form-input"
+              id="input-3"
+              step="0.01"
+              v-model="price"
+            />
+          </div>
+          <div class="input-group my-2">
+            <label class="lead" for="year">Year</label>
+            <select class="w-100 dropdown" name="year" v-model="year">
+              <option>2021</option>
+              <option>2020</option>
+              <option>2019</option>
+              <option>2018</option>
+            </select>
+          </div>
+          <div class="input-group my-2 justify-content-center">
+            <input
+              style="display: none"
+              type="file"
+              placeholder="Upload Image"
+              class="form-control form-input"
+              id="input-6"
+              @change="upload"
+              ref="uploadFile"
+            />
+            <!-- style="display:none" -->
+            <button
+              type="button"
+              class="btn btn-secondary"
+              @click="$refs.uploadFile.click()"
+            >
+              Upload Image
+            </button>
+          </div>
+          <img
+            :src="DataURL"
+            class="d-block mx-auto mb-4"
+            alt=""
+            width="150px"
+            height="150px"
           />
-        </div>
-        <div class="input-group my-2">
-          <textarea
-            rows="5"
-            col="10"
-            placeholder="Description"
-            class="form-control form-input"
-            id="input-2"
-            v-model="description"
-          />
-        </div>
-        <div class="input-group my-2">
-          <input
-            type="Number"
-            placeholder="Price"
-            class="form-control form-input"
-            id="input-3"
-            step="0.01"
-            v-model="price"
-          />
-        </div>
-        <div class="input-group my-2">
-          <label class="lead" for="year">Year</label>
-         <select class="w-100 dropdown" name="year" v-model="year">
-           <option >2021</option>
-           <option >2020</option>
-           <option >2019</option>
-           <option >2018</option>
-         </select>
-        </div>
-        <div class="input-group my-2 justify-content-center">
-          <input
-            style="display: none"
-            type="file"
-            placeholder="Upload Image"
-            class="form-control form-input"
-            id="input-6"
-            @change="upload"
-            ref="uploadFile"
-          />
-          <!-- style="display:none" -->
+
           <button
-            type="button"
-            class="btn btn-secondary"
-            @click="$refs.uploadFile.click()"
+            class="btn btn-outline-secondary w-75 submit-btn"
+            type="submit"
           >
-            Upload Image
+            <span v-if="!getLoaderState">Create Video</span>
+            <span
+              v-if="getLoaderState"
+              class="spinner-border spinner-border-sm text-muted"
+              role="status"
+            >
+              <span class="sr-only">Loading...</span>
+            </span>
           </button>
-        </div>
-        <img :src="DataURL" class="d-block mx-auto mb-4" alt="" width="150px" height="150px" />
-
-        <button class="btn btn-outline-secondary w-75 submit-btn" type="submit">
-          <span v-if="!getLoaderState">Create Video</span>
-          <span
-            v-if="getLoaderState"
-            class="spinner-border spinner-border-sm text-muted"
-            role="status"
-          >
-            <span class="sr-only">Loading...</span>
-          </span>
-        </button>
-      </form>
-    </div>
+        </form>
+      </div>
     </div>
   </div>
 </template>
@@ -162,8 +173,22 @@ export default {
       const file = event.target.files[0];
       let url = URL.createObjectURL(file);
       this.$store.dispatch("update_video", { Image: file });
-      this.DataURL = url; 
+      this.DataURL = url;
     },
+  },
+  beforeRouteEnter(to, from, next) {
+    
+    const expiresIn = localStorage.getItem("expiresIn");
+    let expDate = Date.parse(expiresIn);
+    if (expDate) {
+      if (expDate > Date.now()) {
+        next();
+      } else {
+        next("/login");
+      }
+    } else {
+      next("/login");
+    }
   },
 };
 </script>
@@ -189,7 +214,6 @@ export default {
 }
 
 .form-input {
- 
   border-radius: 0;
   border-bottom: 1px groove rgb(146, 146, 146);
   transition: all 0.2s;
@@ -227,7 +251,6 @@ export default {
 }
 
 .form-input:focus {
-
   border-bottom: 1px solid rgb(146, 146, 146);
   box-shadow: none;
   transform: translate(-3px, -3px);

@@ -1,6 +1,7 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
 import videos from './modules/videos'
+import Paystack from './modules/Paystack'
 import Carts from './modules/Carts'
 import videoDetails from './modules/videoDetails'
 import * as actions from "./actions";
@@ -14,6 +15,7 @@ export const store = new Vuex.Store({
         isAuthorized: false,
         isSignedUp: false,
         isAdmin: false,
+        errorMessage:'',
         email: '',
         password: '',
         UserDetail: {
@@ -26,7 +28,9 @@ export const store = new Vuex.Store({
             imgUrl: '',
             cart: [],
             orders: []
-        }
+        },
+        total:0,
+        shippingFee: 4,
     },
     actions,
     getters,
@@ -34,6 +38,7 @@ export const store = new Vuex.Store({
     modules: {
         videos,
         videoDetails,
-        Carts
+        Carts,
+        Paystack
     }
 })

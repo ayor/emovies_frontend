@@ -12,6 +12,7 @@
             Sign In
           </h1>
         </div>
+        <small class="text-danger slide_in" >{{ getErrorMessage }}</small>
         <div class="input-group my-2">
           <input
             type="text"
@@ -52,7 +53,6 @@
   </div>
 </template>
 <script>
-
 import { mapActions, mapGetters } from "vuex";
 export default {
   data() {
@@ -69,7 +69,7 @@ export default {
     ...mapActions(["signIn"]),
   },
   computed: {
-    ...mapGetters(["getAuthState", "getLoaderState"]),
+    ...mapGetters(["getAuthState", "getErrorMessage", "getLoaderState"]),
     email: {
       get() {
         return this.$store.getters.getEmail;
@@ -85,9 +85,8 @@ export default {
       set(password) {
         this.$store.dispatch("updatePassword", password);
       },
-    },
-
-  }
+    }
+  },
 };
 </script>
 <style scoped>
@@ -101,6 +100,22 @@ export default {
   margin: auto;
   width: 35%;
   border-radius: 5px;
+}
+
+.slide_in{
+  transition: all 1s;
+  animation: slide 1s ease-in;
+}
+
+@keyframes slide {
+  0%{
+    opacity: 0;
+    transform: translateY(100px) 
+  }
+  100%{
+    opacity: 1;
+    transform: translateY(0px);
+  }
 }
 @media (max-width: 1024px) {
   .sign-in-form {

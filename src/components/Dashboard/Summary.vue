@@ -39,7 +39,7 @@
         </div>
         <div class="card-body">
           <div class="card-text d-flex justify-content-between">
-            <p class="h2">{{getUserDetail['cart'].length}}</p>
+            <p class="h2">{{Carts.length}}</p>
             <i class="fa fa-shopping-cart fa-2x text-danger"></i>
           </div>
         </div>
@@ -55,7 +55,7 @@
 
 export default {
   computed:{
-    ...mapGetters(['getUserDetail'])
+    ...mapGetters(['getUserDetail', "Carts"])
   }
 };
 </script>

@@ -9,7 +9,8 @@
           Top Orders
         </caption>
         <thead class="thead-light">
-          <th>ID</th>
+         
+          <th>Paystack Reference</th>
           <th>Order Date</th>
           <th>Total($)</th>
           <th>Invoice</th>
@@ -17,13 +18,17 @@
 
         <tbody class="table-body">
           <tr v-for="order in getUserDetail['orders']" :key="order._id">
-            <td>####</td>
+            
+            <td>{{order.paystackReference}}</td>
+            <td>{{new Date(order.createdAt).toLocaleString()}}</td>
+            <td>${{order.total}}</td>
+            <td><a  :href="'http://localhost:8080/invoices/invoice-'+ order._id+'.pdf'" target='_blank'>Download Invoice</a></td>
           </tr>
         </tbody>
       </table>
     </div>
     <div class="col-12 col-lg-6">
-      <div class="my-3" v-if="getUserDetail['cart'].length < 1">
+      <div class="my-3" v-if="Carts.length < 1">
         <p class="text-muted text-center lead font-weight-bold"> You need to add items to your cart...</p>
       </div>
       <table v-else class="table table-bordered table-hover">
@@ -34,12 +39,15 @@
           <th>Movie title</th>
           <th>Qty</th>
           <th>Unit price($)</th>
-          <th>Sum($)</th>
+          <th>Total($)</th>
         </thead>
 
         <tbody class="table-body">
-          <tr v-for="order in getUserDetail['orders']" :key="order._id">
-            <td>####</td>
+          <tr v-for="video in Carts" :key="video._id">
+            <td>{{video.title}}</td>
+            <td>{{video.qty}}</td>
+            <td>{{video.price}}</td>
+            <td>{{video.price * video.qty}}</td>
           </tr>
         </tbody>
       </table>
@@ -48,10 +56,33 @@
 </template>
 <script>
 import { mapGetters } from "vuex";
+import axios from 'axios';
 export default {
-  computed: {
-    ...mapGetters(["getUserDetail"]),
+  data(){
+    return{
+      invoiceLink:''
+    }
   },
+  computed: {
+    ...mapGetters(["getUserDetail","Carts"]),
+  },
+  methods:{
+    getInvoice(orderId){
+      const token  = localStorage.getItem('token');
+
+        axios.get('http://localhost:8080/invoice/invoice-'+ orderId+'.pdf', {
+          headers:{
+            'Authorization':'Bearer '+ token
+          }
+        }).
+        then(res=> {
+          if(res.statusCode === 200){
+            this.invoiceLink = 'http://localhost:8080/invoice/invoice-'+ orderId+'.pdf'
+          }
+        })
+    }
+  }
+    
 };
 </script>
 <style scoped>

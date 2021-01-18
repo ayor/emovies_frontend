@@ -90,7 +90,7 @@ export default {
     };
   },
   computed: {
-    ...mapGetters(["added_to_cart","videoDetails"]),
+    ...mapGetters(["added_to_cart","getVideoDetails"]),
   },
   methods: {
     ...mapActions(["addToCart", "toggleCartStatus"]),
@@ -100,7 +100,7 @@ export default {
     getVideo(id) {
       axios.get("http://localhost:8080/api/video/" + id).then((res) => {
        
-        this.videoDetails = { ...this.videoDetails, ...res.data.video };
+        this.Video = { ...this.getVideoDetails, ...res.data.video };
       });
 
       axios.get("http://localhost:8080/api/video").then((res) => {

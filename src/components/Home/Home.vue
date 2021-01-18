@@ -16,6 +16,17 @@ export default {
     appHeader,
     appAbout,
     appFooter
+  },
+  mounted(){
+    
+    const expiresIn = localStorage.getItem("expiresIn");
+    let expDate = Date.parse(expiresIn);
+    if(expDate){
+      if(expDate < Date.now()){
+        this.$store.commit('USER_IS_AUTHORIZED', false)
+      }
+    }
+    
   }
 };
 </script>

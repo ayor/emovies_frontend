@@ -29,6 +29,7 @@ export const signIn = ({ commit }, payload) => {//context on=bjet was destructur
     }).then(({ data }) => {
 
         localStorage.setItem('token', data.token);
+        localStorage.setItem('expiresIn', data.expiresIn);
         //on login success, navigate to the user dashboard
         commit('USER_IS_AUTHORIZED', true);
         commit('UPDATE_USER_EMAIL', '');
@@ -44,10 +45,19 @@ export const signIn = ({ commit }, payload) => {//context on=bjet was destructur
 
     })
         .catch(error => {
+            
+           if(error){
+            commit('SHOW_ERROR_SIGNIN_MESSAGE', "Invalid email or password, kindly try again.")
+            setTimeout(()=>{
+                commit('SHOW_ERROR_SIGNIN_MESSAGE', "")
+
+            }, 5000)
+           }
             commit('USER_IS_AUTHORIZED', false);
             commit('UPDATE_USER_EMAIL', '');
             commit('UPDATE_USER_PASSWORD', '');
             commit('UPDATE_LOADER', false);
+            
             throw error;
         });
 }
@@ -134,6 +144,7 @@ export const createVideo = ({ commit }, { event, getVideoDetails }) => {
 export const logout = ({ commit }) => {
 
     localStorage.removeItem('token');
+    localStorage.removeItem('expiresIn');
     commit('USER_IS_AUTHORIZED', false);
     commit('USER_IS_ADMIN', false)
     commit('UPDATE_USER_DETAIL', {
@@ -145,7 +156,34 @@ export const logout = ({ commit }) => {
         imageUrl: "",
         imgUrl: '',
         cart: [],
-        orders: []
+        orders: [],
+        status:''
     })
     router.push('/')
 }
+
+export const processPayment = ({getters}, payload) => { 
+
+    //on succesful payment, create the order and send to the server
+    let order = {
+        videos:getters.Carts,
+        customerId: getters.getUserDetail._id,
+        total: getters.getTotal,
+        paystackReference: payload.reference,
+        shippingMode: getters.getShippingFee == 10 ? 'Fast' : 'Standard',
+        shippingFee: getters.getShippingFee
+    };
+
+    let token = localStorage.getItem('token');
+
+    axios('http://localhost:8080/api/orders/order', {
+        method:'POST',
+        data: {
+            ...order
+        },
+        headers:{
+            'Authorization': 'Bearer ' + token,
+            'Content-Type':'application/json'
+        }
+    } )
+ }
