@@ -1,6 +1,5 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
-import videos from './modules/videos'
 import Paystack from './modules/Paystack'
 import Carts from './modules/Carts'
 import videoDetails from './modules/videoDetails'
@@ -36,7 +35,6 @@ export const store = new Vuex.Store({
     getters,
     mutations,
     modules: {
-        videos,
         videoDetails,
         Carts,
         Paystack

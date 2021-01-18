@@ -2,7 +2,6 @@ import Customer from './components/Dashboard/Dashboard.vue';
 import Movies from './components/Movies/Movies.vue';
 import MovieDetail from './components/Movies/MovieDetail.vue';
 import Home from './components/Home/Home.vue';
-import addCustomer from './components/Customer/addCustomer.vue';
 // import complaints from './components/Customer/complaints.vue';
 import createVideoPage from './components/Admin/CreateVideo';
 import loginPage from './components/Home/SignIn/SignUpPage';

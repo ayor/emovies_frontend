@@ -17,7 +17,7 @@
               {{ Video.title }}
             </h3>
             <!-- selects the first 15 characters of the description  -->
-            <h2 class="h2 font-weight-bold">${{ Video.price ? Video.price.toFixed(2) : null }}</h2>
+            <h2 class="h2 font-weight-bold">₦{{ Video.price ? Video.price.toFixed(2) : null }}</h2>
             <p class="lead my-3">
               {{ Video.description }}
             </p>
@@ -68,7 +68,7 @@
                 />
                 <h6 class="card-title">{{ video.title }}</h6>
                 <p class="card-text font-weight-bold">
-                  ${{ video.price ? video.price.toFixed(2) : null }}
+                  ₦{{ video.price ? video.price.toFixed(2) : null }}
                 </p>
               </div>
             </div>
@@ -98,12 +98,12 @@ export default {
       this.getVideo(id);
     },
     getVideo(id) {
-      axios.get("http://localhost:8080/api/video/" + id).then((res) => {
+      axios.get("https://emovies-ng-api.herokuapp.com/api/video/" + id).then((res) => {
        
         this.Video = { ...this.getVideoDetails, ...res.data.video };
       });
 
-      axios.get("http://localhost:8080/api/video").then((res) => {
+      axios.get("https://emovies-ng-api.herokuapp.com/api/video").then((res) => {
         let data = [...res.data.videos];
         this.similarVideos = data
           .filter(
@@ -114,7 +114,7 @@ export default {
     },
     getImage(path){
         
-        return 'http://localhost:8080/'+ path
+        return 'https://emovies-ng-api.herokuapp.com/'+ path
     }
   },
   components: {

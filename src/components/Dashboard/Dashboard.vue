@@ -30,7 +30,7 @@ export default {
   mounted() {
     let token = localStorage.getItem("token");
     axios
-      .get("http://localhost:8080/api/customer/userinfo", {
+      .get("https://emovies-ng-api.herokuapp.com/api/customer/userinfo", {
         headers: {
           Authorization: "Bearer " + token,
         },

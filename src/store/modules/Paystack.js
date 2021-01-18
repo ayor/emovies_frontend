@@ -1,8 +1,8 @@
 const state = {
     paystackDetail: {
         
-        PUBLIC_KEY: "pk_test_038c1b9473ae872f96fa0b4db088e39ecfd914e8",
-        close: () => {  console.log("You closed checkout page") }
+        PUBLIC_KEY: "pk_live_8ef45c88d96070960e0c73ffeedbc494724c8142",
+        close: () => {   }
     }
 }
 

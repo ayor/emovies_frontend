@@ -56,7 +56,7 @@
                     class="btn btn-outline-success"
                     @click="addToCart({ ...vid, qty: 1 })"
                   >
-                    Add to cart ${{vid.price.toFixed(2)}}
+                    Add to cart ₦{{vid.price.toFixed(2)}}
                   </button>
                 </div>
               </div>
@@ -104,7 +104,7 @@ export default {
   },
   mounted() {
     axios
-      .get("http://localhost:8080/api/video?page=" + this.page)
+      .get("https://emovies-ng-api.herokuapp.com/api/video?page=" + this.page)
       .then(({ data }) => {
         this.setVideosAction([...data.videos]);
         this.numberOfVideos = data.numberOfVideos;
@@ -122,7 +122,7 @@ export default {
   methods: {
     ...mapActions(["addToCart", "setVideosAction"]),
     returnImgUrl(path) {
-      return `http://localhost:8080/${path}`;
+      return `https://emovies-ng-api.herokuapp.com/${path}`;
     },
     loadError() {
       this.errorOccurred = true;
@@ -136,7 +136,7 @@ export default {
       this.imgClass = "card-img-top rounded preview";
       this.page -= 1;
       axios
-        .get("http://localhost:8080/api/video?page=" + this.page)
+        .get("https://emovies-ng-api.herokuapp.com/api/video?page=" + this.page)
         .then(({ data }) => {
           this.setVideosAction([...data.videos]);
           setTimeout(() => {
@@ -153,7 +153,7 @@ export default {
       this.imgClass = "card-img-top rounded preview";
       this.page += 1;
       axios
-        .get("http://localhost:8080/api/video?page=" + this.page)
+        .get("https://emovies-ng-api.herokuapp.com/api/video?page=" + this.page)
         .then(({ data }) => {
           this.setVideosAction([...data.videos]);
           setTimeout(() => {

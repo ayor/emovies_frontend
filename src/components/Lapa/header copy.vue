@@ -34,7 +34,7 @@
                   <h6>{{cart.title}}</h6>
 
                   <p style="margin-bottom: 2px;">
-                    <b>$ {{cart.price}}</b>
+                    <b>₦ {{cart.price}}</b>
                   </p>
                   <div class="d-flex" style="vertical-align: middle">
                     <label for="days" class="mr-3">
@@ -61,7 +61,7 @@
             <div class="modal-footer d-flex justify-content-between">
               <div class="d-flex justify-content-between">
                 <h6 class="mr-5">Total</h6>
-                <h6>$ {{totalPrice}}</h6>
+                <h6>₦ {{totalPrice}}</h6>
               </div>
               <div>
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>

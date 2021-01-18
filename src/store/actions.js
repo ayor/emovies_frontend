@@ -22,7 +22,7 @@ export const signIn = ({ commit }, payload) => {//context on=bjet was destructur
 
     const { _id, email, password } = payload.userInfo;
 
-    axios.post('http://localhost:8080/api/auth/signin', {
+    axios.post('https://emovies-ng-api.herokuapp.com/api/auth/signin', {
         id: _id,
         email,
         password
@@ -69,7 +69,7 @@ export const singUp = (context, { event, getUserDetail }) => {
 
     const formData = CREATE_FORM_DATA(getUserDetail);
 
-    axios.post('http://localhost:8080/api/auth/signup', formData
+    axios.post('https://emovies-ng-api.herokuapp.com/api/auth/signup', formData
     ).then(res => {
 
         if (res.status === 201 || res.status === 200) {
@@ -113,7 +113,7 @@ export const createVideo = ({ commit }, { event, getVideoDetails }) => {
 
     let formData = CREATE_FORM_DATA(getVideoDetails)
 
-    fetch('http://localhost:8080/api/admin/video',
+    fetch('https://emovies-ng-api.herokuapp.com/api/admin/video',
         {
             method: 'POST',
             body: formData,
@@ -176,7 +176,7 @@ export const processPayment = ({getters}, payload) => {
 
     let token = localStorage.getItem('token');
 
-    axios('http://localhost:8080/api/orders/order', {
+    axios('https://emovies-ng-api.herokuapp.com/api/orders/order', {
         method:'POST',
         data: {
             ...order

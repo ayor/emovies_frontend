@@ -67,7 +67,7 @@
               <div class="unitprice   d-flex flex-column">
                 <div>
                   <p class="font-weight-bold mr-5 pr-5 text-muted lead">
-                    ${{
+                    ₦{{
                       video.price
                     }}
                   </p>
@@ -76,7 +76,7 @@
               <div class="unitprice  d-flex flex-column">
                 <div >
                   <p class="font-weight-bold  text-primary mr-2 lead">
-                    ${{
+                    ₦{{
                       (video.price * video.qty).toFixed(2)
                     }}
                   </p>
@@ -116,7 +116,7 @@
                    
                  
                    
-                   ${{getTotal}}
+                   ₦{{getTotal}}
                    
                   </p>
                 </div>
@@ -127,8 +127,8 @@
                <div class="col">
                  <p class="h6 mb-3">Shipping Method</p>
                 <select name="" id="" class="custom-select custom-select-sm" v-model="shippingFee">
-                  <option value="4">Standard Shipping $4</option>
-                  <option value="10">Fast Shipping $10</option>
+                  <option value="4">Standard Shipping ₦4</option>
+                  <option value="10">Fast Shipping ₦10</option>
                 </select>
                 </div>
                
@@ -147,7 +147,7 @@
               :close="get_paystack_details['close']"
               class="btn btn-dark w-100 mt-5"
             >
-              Pay ${{getTotal}}
+              Pay ₦{{getTotal}}
             </paystack>
             <router-link to="/login" class="btn btn-dark mt-5" v-else
             >Login to CheckOut</router-link
@@ -155,7 +155,7 @@
           <!-- <div class="total d-flex justify-content-end p-2">
             <h3>Total:</h3>
             &nbsp;&nbsp;&nbsp;
-            <h3>${{ total }}</h3>
+            <h3>₦{{ total }}</h3>
           </div> -->
 
           <!-- proceed to checkoout button pops up the modal checkout modal view -->
@@ -212,7 +212,7 @@ export default {
   methods: {
     ...mapActions(["processPayment"]),
     returnImgUrl(path) {
-      return `http://localhost:8080/${path}`;
+      return `https://emovies-ng-api.herokuapp.com//${path}`;
     },
     changeCartItem(event, cart, index) {
       const selectedDay =

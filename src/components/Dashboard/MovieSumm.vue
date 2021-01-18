@@ -12,7 +12,7 @@
          
           <th>Paystack Reference</th>
           <th>Order Date</th>
-          <th>Total($)</th>
+          <th>Total(₦)</th>
           <th>Invoice</th>
         </thead>
 
@@ -21,8 +21,8 @@
             
             <td>{{order.paystackReference}}</td>
             <td>{{new Date(order.createdAt).toLocaleString()}}</td>
-            <td>${{order.total}}</td>
-            <td><a  :href="'http://localhost:8080/invoices/invoice-'+ order._id+'.pdf'" target='_blank'>Download Invoice</a></td>
+            <td>₦{{order.total}}</td>
+            <td><a  :href="'https://emovies-ng-api.herokuapp.com/invoices/invoice-'+ order._id+'.pdf'" target='_blank'>Download Invoice</a></td>
           </tr>
         </tbody>
       </table>
@@ -38,8 +38,8 @@
         <thead class="thead-dark">
           <th>Movie title</th>
           <th>Qty</th>
-          <th>Unit price($)</th>
-          <th>Total($)</th>
+          <th>Unit price(₦)</th>
+          <th>Total(₦)</th>
         </thead>
 
         <tbody class="table-body">
@@ -70,14 +70,14 @@ export default {
     getInvoice(orderId){
       const token  = localStorage.getItem('token');
 
-        axios.get('http://localhost:8080/invoice/invoice-'+ orderId+'.pdf', {
+        axios.get('https://emovies-ng-api.herokuapp.com/invoice/invoice-'+ orderId+'.pdf', {
           headers:{
             'Authorization':'Bearer '+ token
           }
         }).
         then(res=> {
           if(res.statusCode === 200){
-            this.invoiceLink = 'http://localhost:8080/invoice/invoice-'+ orderId+'.pdf'
+            this.invoiceLink = 'https://emovies-ng-api.herokuapp.com/invoice/invoice-'+ orderId+'.pdf'
           }
         })
     }
