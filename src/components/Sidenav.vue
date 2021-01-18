@@ -35,7 +35,7 @@ export default {
     props:["location"],
     methods:{
       getUserImg(){
-        return `https://emovies-ng-api.herokuapp.com//${this.getUserDetail['imageUrl'].split('\\').join('/')}`
+        return `https://emovies-ng-api.herokuapp.com/${this.getUserDetail['imageUrl'].split('\\').join('/')}`
       }
     },
 
