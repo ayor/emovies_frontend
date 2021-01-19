@@ -212,7 +212,7 @@ export default {
   methods: {
     ...mapActions(["processPayment"]),
     returnImgUrl(path) {
-      return `https://emovies-ng-api.herokuapp.com//${path}`;
+      return `https://emovies-ng-api.herokuapp.com/${path}`;
     },
     changeCartItem(event, cart, index) {
       const selectedDay =
