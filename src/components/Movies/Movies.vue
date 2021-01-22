@@ -197,18 +197,18 @@ a.progressive:not(.replace) {
 }
 
 .cart_alert{
-  animation: fade-in .6s;
+  animation: fade-in .4s;
   transition: all 1s;
 }
 
 @keyframes fade-in {
   0%{
     transform: translateY(-100px);
-    opacity: 1;
+    opacity: 0;
   }
   100%{
     transform: translateY(0);
-    opacity: 0;
+    opacity: 1;
   }
 }
 

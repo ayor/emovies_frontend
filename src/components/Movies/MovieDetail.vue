@@ -132,7 +132,7 @@ export default {
   height: 740px;
 }
 .cart_alert{
-  animation: fade-in .6s;
+  animation: fade-in .4s;
   transition: all 1s;
 }
 
