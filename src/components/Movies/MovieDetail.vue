@@ -3,7 +3,15 @@
     <div class="row">
       <div class="col">
         <app-top-nav location="movies"></app-top-nav>
-
+        <div
+          v-if="added_to_cart"
+          class="alert alert-success cart_alert fixed-top"
+          id="alert"
+        >
+          <span
+            ><i class="fa fa-check-circle-o text-dark"></i> Item Added
+          </span>
+        </div>
         <div class="row mt-3">
           <div class="col-12 col-md-6 col-lg-6">
             <img
@@ -13,11 +21,13 @@
             />
           </div>
           <div class="col-12 col-md-6 text-center py-3 col-lg-6">
-            <h3 class="display-md-3 display-1 font-weight-bold text-muted">
+            <h3 class="display-md-3 display-lg-1 font-weight-bold text-muted">
               {{ Video.title }}
             </h3>
             <!-- selects the first 15 characters of the description  -->
-            <h2 class="h2 font-weight-bold">₦{{ Video.price ? Video.price.toFixed(2) : null }}</h2>
+            <h2 class="h2 font-weight-bold">
+              ₦{{ Video.price ? Video.price.toFixed(2) : null }}
+            </h2>
             <p class="lead my-3">
               {{ Video.description }}
             </p>
@@ -32,22 +42,6 @@
             <small class="text-muted font-weight-bold d-block my-3"
               ><b>Delivery time depends on timezone and location </b></small
             >
-            <div
-              v-show="added_to_cart"
-              id="alert"
-              class="mt-2 alert alert-success alert-dismissible added-alert fade show"
-              role="alert"
-            >
-              Added to Cart
-              <button
-                @click="toggleCartStatus"
-                type="button"
-                class="close"
-                aria-label="Close"
-              >
-                <span aria-hidden="true"><i class="fa fa-times"></i></span>
-              </button>
-            </div>
           </div>
         </div>
         <div class="row border-top border-bottom mt-3">
@@ -90,7 +84,7 @@ export default {
     };
   },
   computed: {
-    ...mapGetters(["added_to_cart","getVideoDetails"]),
+    ...mapGetters(["added_to_cart", "getVideoDetails"]),
   },
   methods: {
     ...mapActions(["addToCart", "toggleCartStatus"]),
@@ -98,24 +92,24 @@ export default {
       this.getVideo(id);
     },
     getVideo(id) {
-      axios.get("https://emovies-ng-api.herokuapp.com/api/video/" + id).then((res) => {
-       
-        this.Video = { ...this.getVideoDetails, ...res.data.video };
-      });
+      axios
+        .get("https://emovies-ng-api.herokuapp.com/api/video/" + id)
+        .then((res) => {
+          this.Video = { ...this.getVideoDetails, ...res.data.video };
+        });
 
-      axios.get("https://emovies-ng-api.herokuapp.com/api/video").then((res) => {
-        let data = [...res.data.videos];
-        this.similarVideos = data
-          .filter(
-            (el) => el.year == this.Video.year && el._id !== id
-          )
-          .splice(0, 5);
-      });
+      axios
+        .get("https://emovies-ng-api.herokuapp.com/api/video")
+        .then((res) => {
+          let data = [...res.data.videos];
+          this.similarVideos = data
+            .filter((el) => el.year == this.Video.year && el._id !== id)
+            .splice(0, 5);
+        });
     },
-    getImage(path){
-        
-        return 'https://emovies-ng-api.herokuapp.com/'+ path
-    }
+    getImage(path) {
+      return "https://emovies-ng-api.herokuapp.com/" + path;
+    },
   },
   components: {
     appTopNav: TopNav,
@@ -137,7 +131,23 @@ export default {
   width: 500px;
   height: 740px;
 }
-@media (max-width: 1024px) {
+.cart_alert{
+  animation: fade-in .6s;
+  transition: all 1s;
+}
+
+@keyframes fade-in {
+  0%{
+    transform: translateY(-100px);
+    opacity: 0;
+  }
+  100%{
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+@media (max-width: 1224px) {
   .img-display {
     width: 350px;
     height: 500px;
@@ -147,12 +157,14 @@ export default {
   .img-display {
     width: 350px;
     height: 500px;
+     margin: 0 15%;
   }
 }
-@media (max-width: 575px) {
+@media (max-width: 500px) {
   .img-display {
-    width: 250px;
+    width: 350px;
     height: 500px;
+    margin: 0 9%;
   }
 }
 

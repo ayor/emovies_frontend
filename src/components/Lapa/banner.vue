@@ -7,7 +7,7 @@
     </h1>
     <p
       class="lead banner-par"
-    >Lorem ipsum dolor sit amet, consectetur adipisicing elit. Exercitationem, iste.</p>
+    >We know you eat breakfast, lunch and dinner with a whole lot of movies..</p>
     <router-link to='/movies' class="btn btn-danger banner-button w-50 text-center "> Get Movies<i class="fa fa-arrow-circle-o-right ml-3"></i>  </router-link>
     <!-- <div class="input-group banner-input-group mt-5">
       <i class></i>

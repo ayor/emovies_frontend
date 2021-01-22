@@ -36,9 +36,6 @@ const mutations = {
             state.Carts.push(payload)
         }
        
-
-
-       
     },
     remove_from_cart: (state, payload) => state.Carts.splice(payload, 1),
     toggle_addedToCart: (state, payload) => state.addedToCart = payload,
@@ -58,6 +55,10 @@ const actions = {
     //actions take in a context object containing getters, mutations and a commit method
     addToCart: ({ commit }, payload) => {
         commit('toggle_addedToCart', true);
+
+        setTimeout(()=>{
+            commit('toggle_addedToCart', false);
+        }, 3000)
         commit('add_to_cart', payload);
     },
     toggleCartStatus: ({ commit }) => {

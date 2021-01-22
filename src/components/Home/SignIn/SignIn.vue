@@ -8,7 +8,7 @@
         class
       >
         <div class="form-header">
-          <h1 class="display-4 text-muted font-weight-bold text-left mb-2">
+          <h1 class="display-md-4 text-muted font-weight-bold text-left mb-2">
             Sign In
           </h1>
         </div>
@@ -120,6 +120,11 @@ export default {
 @media (max-width: 1024px) {
   .sign-in-form {
     width: 55%;
+  }
+}
+@media (max-width: 500px) {
+  .sign-in-form {
+    width: 95%;
   }
 }
 .form-header {

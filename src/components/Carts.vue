@@ -23,12 +23,15 @@
               class="d-flex border-bottom justify-content-between align-items-center"
             >
               <div class="img d-flex py-3">
-                <img
+                <router-link :to="'/movies/'+video._id">
+<img
                   :src="returnImgUrl(video.imageUrl)"
                   class="image rounded mr-3"
                   height="120"
                   width="120"
                 />
+                </router-link>
+                
                 <div class="d-flex flex-column">
                   <p class="text-muted h6 mb-2"> Title: {{ video.title }}</p>
                   <p class="text-muted h6 mb-2"> Year: {{ video.year }}</p>

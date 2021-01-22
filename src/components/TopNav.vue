@@ -79,8 +79,7 @@ export default {
   text-decoration: none;
 }
 .cart{  
-  font-size:12px;
- 
+  font-size:12px; 
  position: absolute;
  top: 4px;
   padding: 5px;
@@ -88,6 +87,19 @@ export default {
   animation: cart 2s ease-in-out;
   transition: all 1s;
 }
+
+@media (max-width:1024px ){
+  .cart{  
+  font-size:12px; 
+ position: absolute;
+ top: 167px;
+  padding: 5px;
+  margin-left: -5px;  
+  animation: cart 2s ease-in-out;
+  transition: all 1s;
+  }
+}
+
 @keyframes cart {
   0%{
     transform: scale(-1,1);

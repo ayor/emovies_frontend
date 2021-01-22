@@ -13,7 +13,10 @@
         Launch demo modal
       </button>
       <app-modal v-show="errorOccurred"></app-modal>
-
+    
+        <div v-if="added_to_cart" class="alert alert-success cart_alert fixed-top" id="alert" >
+        <span><i class="fa fa-check-circle-o text-dark"></i> Item Added </span>  
+      </div>
       <div v-if="getVideos.length < 1 && !errorOccurred" class="row">
         <div class="col my-5 d-flex justify-content-center">
           <span
@@ -35,17 +38,17 @@
               class="m-3 col-md-4 col-lg-3 col-xl-2 text-center"
               style="width: 28rem"
             >
-            <router-link :to="'/movies/' + vid._id">
-             <a :href="loaderImage" :class="replace">
-                <img
-                  :class="imgClass"
-                  :src="returnImgUrl(vid.imageUrl)"
-                  alt="Card image cap"
-                  height="349"
-                />
-              </a>
-            </router-link>
-             
+              <router-link :to="'/movies/' + vid._id">
+                <a :href="loaderImage" :class="replace">
+                  <img
+                    :class="imgClass"
+                    :src="returnImgUrl(vid.imageUrl)"
+                    alt="Card image cap"
+                    height="349"
+                  />
+                </a>
+              </router-link>
+
               <div class="card-body">
                 <h3 class="card-title">{{ vid.title }}</h3>
                 <!-- selects the first 15 characters of the description  -->
@@ -56,7 +59,7 @@
                     class="btn btn-outline-success"
                     @click="addToCart({ ...vid, qty: 1 })"
                   >
-                    Add to cart ₦{{vid.price.toFixed(2)}}
+                    <span> Add to cart ₦{{ vid.price.toFixed(2) }} </span>
                   </button>
                 </div>
               </div>
@@ -100,7 +103,7 @@ export default {
     };
   },
   computed: {
-    ...mapGetters(["getVideos"]),
+    ...mapGetters(["getVideos", "added_to_cart"]),
   },
   mounted() {
     axios
@@ -184,7 +187,6 @@ export default {
   cursor: pointer;
 }
 a.progressive {
-  
   position: relative;
   display: block;
   overflow: hidden;
@@ -193,6 +195,23 @@ a.progressive {
 a.progressive:not(.replace) {
   cursor: default;
 }
+
+.cart_alert{
+  animation: fade-in .6s;
+  transition: all 1s;
+}
+
+@keyframes fade-in {
+  0%{
+    transform: translateY(-100px);
+    opacity: 1;
+  }
+  100%{
+    transform: translateY(0);
+    opacity: 0;
+  }
+}
+
 a.progressive img {
   display: block;
   width: 100%;
@@ -206,7 +225,6 @@ a.progressive img.preview {
   transform: scale(1.05);
 }
 img.reveal {
-  
   animation: reveal 1.5s ease-out;
   animation-delay: 2.8s;
 }
