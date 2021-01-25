@@ -1,9 +1,8 @@
 <template>
-    <nav class="side-nav fixed-left">
+    <nav class="side-nav text-center fixed-left">
             <div class="user-info justify-content-center d-flex my-5">
-      <!-- <img :src="getUserImg('assets/img/cartoon.png')" class="rounded" alt="User Image"> -->
       <div class="user-detail text-center pb-1">
-        <h1 class="display-5">{{getUserDetail.firstname + " " + getUserDetail.lastname}}</h1>
+        <h1 class="display-md-5">{{getUserDetail.firstname + " " + getUserDetail.lastname}}</h1>
         <small class="text-muted lead">{{getUserDetail.Email}}</small>
       </div>
     </div>
@@ -18,7 +17,7 @@
         <li :class="(location === 'savedItems') ? 'nav-item p-2 m-2 side-nav-active' : 'nav-item p-2 m-2'"> <i class="fa fa-play text-light"></i> <router-link to='/'>My Saved Items</router-link> </li>
       </ul>
     </div>
-    <img :src='getUserImg()' class=" m-4 rounded-circle " width="210" height="200" alt="user image">
+    <img :src='getUserImg()' class="m-4 user_image rounded-circle " alt="user image">
     </nav>
 </template>
 <script>
@@ -69,4 +68,10 @@ export default {
 
   border-bottom: 1px #ccc solid;
 }
+
+  .user_image{
+   
+    width: 120px;
+  }
+
 </style>
