@@ -1,5 +1,5 @@
 <template>
-    <div class="row bg-dark py-5 text-center">
+    <div class="row _footer py-5 text-center">
         <div class="col ">
             <i class="fa fa-sliders fa-5x text-danger m-2"></i>
             <div class="text-light">
@@ -24,3 +24,9 @@ export default {
     
 }
 </script>
+
+<style  scoped>
+._footer{
+    background: linear-gradient(rgba(0,0,0,.9), rgba(0,0,0.1));
+    }
+</style>

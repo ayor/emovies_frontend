@@ -5,12 +5,15 @@
         <app-side-nav location="summary"></app-side-nav>
       </div>
       <div class="col-12 col-md-12 col-lg-10">
-        <app-top-nav location="dashboard"></app-top-nav>
-        <app-summary></app-summary>
-        <app-movies></app-movies>
-        <app-footer></app-footer>
+        <div class="">
+          <app-top-nav location="dashboard"></app-top-nav>
+          <app-summary></app-summary>
+          <app-movies></app-movies>
+        </div>
       </div>
     </div>
+            <app-footer></app-footer>
+
   </div>
 </template>
 <script>
@@ -19,7 +22,7 @@ import topNav from "../TopNav";
 import Summary from "./Summary";
 import movie from "./MovieSumm";
 import axios from "axios";
-import Footer from '../Lapa/footer'; 
+import Footer from "../Lapa/footer";
 import { mapActions, mapGetters } from "vuex";
 export default {
   components: {
@@ -27,7 +30,7 @@ export default {
     appTopNav: topNav,
     appSummary: Summary,
     appMovies: movie,
-    appFooter: Footer
+    appFooter: Footer,
   },
 
   mounted() {
@@ -59,10 +62,9 @@ export default {
     if (expDate) {
       if (expDate > Date.now()) {
         next();
-      }else{
-  next("/login");
+      } else {
+        next("/login");
       }
-    
     } else {
       next("/login");
     }
