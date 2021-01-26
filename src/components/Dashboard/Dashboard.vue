@@ -8,6 +8,7 @@
         <app-top-nav location="dashboard"></app-top-nav>
         <app-summary></app-summary>
         <app-movies></app-movies>
+        <app-footer></app-footer>
       </div>
     </div>
   </div>
@@ -18,6 +19,7 @@ import topNav from "../TopNav";
 import Summary from "./Summary";
 import movie from "./MovieSumm";
 import axios from "axios";
+import Footer from '../Lapa/footer'; 
 import { mapActions, mapGetters } from "vuex";
 export default {
   components: {
@@ -25,6 +27,7 @@ export default {
     appTopNav: topNav,
     appSummary: Summary,
     appMovies: movie,
+    appFooter: Footer
   },
 
   mounted() {
